@@ -1,4 +1,5 @@
 streamlit
 streamlit-extras
 streamlit_echarts
+streamlit_monaco
 pandas
