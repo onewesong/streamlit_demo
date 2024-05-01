@@ -1,6 +1,7 @@
 from modules import *
 
-tab_text, tab_data, tab_media, tab_widgets, tab_notify = st.tabs(["Text", "Data", "Media", "Widgets", "Notifications"])
+tab_text, tab_data, tab_media, tab_widgets, tab_notify, tab_status = st.tabs(["Text", "Data", "Media", "Widgets", "Notifications", "Status"])
+
 with tab_text:
     with st.echo():
         st.text("This is tab 1", help="help text")
@@ -80,3 +81,15 @@ with tab_notify:
         st.success('Success message')
         e = Exception('This is a test exception')
         st.exception(e)
+
+
+with tab_status:
+    with st.echo():
+        with st.spinner('Wait for it...'):
+            time.sleep(5)
+        st.success('Success message')
+        st.error('Error message')
+        st.warning('Warning message')
+        st.info('Info message')
+        st.stop()
+        st.write('This line will not be executed.')
