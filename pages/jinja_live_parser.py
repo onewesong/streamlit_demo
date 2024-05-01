@@ -25,6 +25,7 @@ with col_1:
 
 with col_2:
     # Render button
+    show_whitespace = st.toggle("Show Whitespace", value=False)
     if st.button("Render", type="primary"):
         try:
             # Create Jinja template object
@@ -32,6 +33,8 @@ with col_2:
             variable_dict = yaml.safe_load(variable_value)
             # Render the template with variable
             rendered_template = template.render(**variable_dict)
+            if show_whitespace:
+                rendered_template = rendered_template.replace(' ', '·')
 
             # Display the rendered template
             st.code(rendered_template, language="html")
