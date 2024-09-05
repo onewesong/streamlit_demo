@@ -120,6 +120,9 @@ def main():
                 on_click=reset_conversation,
             )
 
+            with st.popover("View messages"):
+                st.write(st.session_state.messages)
+
             st.divider()
 
             # Image Upload
