@@ -2,5 +2,6 @@ streamlit
 streamlit-extras
 streamlit_echarts
 streamlit_monaco
+extra_streamlit_components
 vega_datasets
 pandas
