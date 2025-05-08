@@ -43,7 +43,7 @@ TOOL_HOOKS = {
     "get_current_weather": get_current_weather,
 }
 
-def chat_stream(messages, model="gpt-3.5-turbo", tools=[], **kargs):
+def chat_stream(messages, model="gpt-4o-mini", tools=[], **kargs):
     response = client.chat.completions.create(
         model=model,
         messages=messages,
