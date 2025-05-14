@@ -91,9 +91,19 @@ if prompt := st.chat_input():
     st.chat_message("user").write(prompt)
     response_messages = ''
     response = chat_stream(st.session_state.chat_history, tools=tools)
-    first_item = next(response)
-    if isinstance(first_item, list):
-        tool_calls = first_item
+    tool_calls = []
+    while True:
+        with st.chat_message("assistant"):
+            assistant_output = st.empty()
+            for i in response:
+                if isinstance(i, str):
+                    response_messages += i
+                    assistant_output.write(response_messages)
+                elif isinstance(i, list):
+                    tool_calls = i
+                    break
+        if not tool_calls:
+            break
         st.session_state.chat_history.append({"role": "assistant", "content": "", "tool_calls": tool_calls})
         for tool_call in tool_calls:
             function_name = tool_call["function"]["name"]
@@ -110,13 +120,12 @@ if prompt := st.chat_input():
                     "content": function_response,
                 }
             )
-        with st.chat_message("assistant"):
-            stream = chat_stream(st.session_state.chat_history, tools=[])
-            response_messages = st.write_stream(stream)
-    else:
-        with st.chat_message("assistant"):
-            response_messages = st.write_stream(itertools.chain([first_item], response))
-    st.session_state.chat_history.append({"role": "assistant", "content": response_messages})
+        # 重置tool_calls并获取新的响应
+        tool_calls = []
+        response = chat_stream(st.session_state.chat_history, tools=tools)
+    # 最后一次响应的处理
+    if response_messages:
+        st.session_state.chat_history.append({"role": "assistant", "content": response_messages})
     
 if show_history:
     st.write(st.session_state.chat_history)
