@@ -23,7 +23,7 @@ st.markdown(
     - [cheat-sheet](https://cheat-sheet.streamlit.app/)
     - [streamlit助手](https://streamly.streamlit.app/)
     - [streamlit扩展库](https://extras.streamlit.app/)
-    - [streamlit组件库](https://streamlit.io/components
+    - [streamlit组件库](https://streamlit.io/components)
     - [自定义组件](https://blog.streamlit.io/how-to-build-your-own-streamlit-component/)
     ### See more complex demos
     - Use a neural net to [analyze the Udacity Self-driving Car Image
